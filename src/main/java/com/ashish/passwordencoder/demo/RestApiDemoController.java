@@ -1,13 +1,13 @@
 package com.ashish.passwordencoder.demo;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Controller Class
+ * @author ashish
+ */
 @RestController
 @RequestMapping("/")
 public class RestApiDemoController {
@@ -23,6 +23,17 @@ public class RestApiDemoController {
     @GetMapping("/coffees")
     Iterable<Coffee>getCoffes(){
         return coffeeList;
+    }
+
+    @GetMapping("/coffees/{id}")
+    Optional<Coffee> getCoffeById(@PathVariable String id)
+    {
+        for (Coffee coffee:coffeeList){
+            if (coffee.getId().equals(id)){
+                return Optional.of(coffee);
+            }
+        }
+        return Optional.empty();
     }
 
 }
