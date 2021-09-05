@@ -43,4 +43,18 @@ public class RestApiDemoController {
         return coffee;
 
     }
+    @PutMapping("/coffees/{id}")
+    Coffee putCoffee(@PathVariable String id,@RequestBody Coffee coffee)
+    {
+        int coffeeIndex=-1;
+        for (Coffee coffee1:coffeeList)
+        {
+            if (coffee1.getId().equals(id))
+            {
+                coffeeIndex=coffeeList.indexOf(coffee1);
+                coffeeList.set(coffeeIndex,coffee);
+            }
+        }
+        return coffeeIndex==-1?postCoffee(coffee):coffee;
+    }
 }
