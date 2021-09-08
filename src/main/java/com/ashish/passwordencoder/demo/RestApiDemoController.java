@@ -9,7 +9,7 @@ import java.util.Optional;
  * @author ashish
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/coffees")
 public class RestApiDemoController {
     private List<Coffee> coffeeList=new ArrayList<>();
     public RestApiDemoController(){
@@ -20,12 +20,12 @@ public class RestApiDemoController {
         ));
     }
 
-    @GetMapping("/coffees")
+    @GetMapping
     Iterable<Coffee>getCoffes(){
         return coffeeList;
     }
 
-    @GetMapping("/coffees/{id}")
+    @GetMapping("/{id}")
     Optional<Coffee> getCoffeById(@PathVariable String id)
     {
         for (Coffee coffee:coffeeList){
@@ -36,14 +36,14 @@ public class RestApiDemoController {
         return Optional.empty();
     }
 
-    @PostMapping("/coffees")
+    @PostMapping
     Coffee postCoffee(@RequestBody Coffee coffee)
     {
         coffeeList.add(coffee);
         return coffee;
 
     }
-    @PutMapping("/coffees/{id}")
+    @PutMapping("/{id}")
     Coffee putCoffee(@PathVariable String id,@RequestBody Coffee coffee)
     {
         int coffeeIndex=-1;
@@ -58,7 +58,7 @@ public class RestApiDemoController {
         return coffeeIndex==-1?postCoffee(coffee):coffee;
     }
 
-    @DeleteMapping("/coffees{id}")
+    @DeleteMapping("/{id}")
     public void deletCoffee(@PathVariable String id)
     {
         coffeeList.removeIf(c->c.getId().equals(id));
