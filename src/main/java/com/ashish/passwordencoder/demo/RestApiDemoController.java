@@ -1,4 +1,6 @@
 package com.ashish.passwordencoder.demo;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class RestApiDemoController {
 
     }
     @PutMapping("/{id}")
-    Coffee putCoffee(@PathVariable String id,@RequestBody Coffee coffee)
+    ResponseEntity putCoffee(@PathVariable String id,@RequestBody Coffee coffee)
     {
         int coffeeIndex=-1;
         for (Coffee coffee1:coffeeList)
@@ -55,7 +57,8 @@ public class RestApiDemoController {
                 coffeeList.set(coffeeIndex,coffee);
             }
         }
-        return coffeeIndex==-1?postCoffee(coffee):coffee;
+        return coffeeIndex==-1?new ResponseEntity(postCoffee(coffee), HttpStatus.CREATED) :
+                new ResponseEntity(coffee, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
