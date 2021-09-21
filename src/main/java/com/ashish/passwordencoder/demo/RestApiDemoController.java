@@ -14,12 +14,10 @@ import java.util.Optional;
 @RequestMapping("/coffees")
 public class RestApiDemoController {
     private List<Coffee> coffeeList=new ArrayList<>();
-    public RestApiDemoController(){
-        coffeeList.addAll(List.of(
-                new Coffee("Nescafe"),
-                new Coffee("Bru Cafe"),
-                new Coffee("Suzu's Cafe")
-        ));
+    private final CoffeeRepository coffeeRepository;
+    public RestApiDemoController(CoffeeRepository coffeeRepository){
+        this.coffeeRepository = coffeeRepository;
+
     }
 
     @GetMapping
