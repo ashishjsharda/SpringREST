@@ -13,7 +13,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/coffees")
 public class RestApiDemoController {
-    private List<Coffee> coffeeList=new ArrayList<>();
     private final CoffeeRepository coffeeRepository;
     public RestApiDemoController(CoffeeRepository coffeeRepository){
         this.coffeeRepository = coffeeRepository;
@@ -22,7 +21,7 @@ public class RestApiDemoController {
 
     @GetMapping
     Iterable<Coffee>getCoffes(){
-        return coffeeList;
+        return coffeeRepository.findAll();
     }
 
     @GetMapping("/{id}")
