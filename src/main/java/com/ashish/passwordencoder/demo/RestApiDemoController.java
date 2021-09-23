@@ -40,17 +40,11 @@ public class RestApiDemoController {
     @PutMapping("/{id}")
     ResponseEntity putCoffee(@PathVariable String id,@RequestBody Coffee coffee)
     {
-        int coffeeIndex=-1;
-        for (Coffee coffee1:coffeeList)
-        {
-            if (coffee1.getId().equals(id))
-            {
-                coffeeIndex=coffeeList.indexOf(coffee1);
-                coffeeList.set(coffeeIndex,coffee);
-            }
-        }
-        return coffeeIndex==-1?new ResponseEntity(postCoffee(coffee), HttpStatus.CREATED) :
-                new ResponseEntity(coffee, HttpStatus.OK);
+
+        return (!coffeeRepository.existsById(id))
+                ? new ResponseEntity<>(coffeeRepository.save(coffee),
+                HttpStatus.CREATED)
+                : new ResponseEntity<>(coffeeRepository.save(coffee), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
