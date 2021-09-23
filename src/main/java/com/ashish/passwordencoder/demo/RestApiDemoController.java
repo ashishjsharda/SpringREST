@@ -27,19 +27,14 @@ public class RestApiDemoController {
     @GetMapping("/{id}")
     Optional<Coffee> getCoffeById(@PathVariable String id)
     {
-        for (Coffee coffee:coffeeList){
-            if (coffee.getId().equals(id)){
-                return Optional.of(coffee);
-            }
-        }
-        return Optional.empty();
+        return coffeeRepository.findById(id);
     }
 
     @PostMapping
     Coffee postCoffee(@RequestBody Coffee coffee)
     {
-        coffeeList.add(coffee);
-        return coffee;
+        return coffeeRepository.save(coffee);
+
 
     }
     @PutMapping("/{id}")
