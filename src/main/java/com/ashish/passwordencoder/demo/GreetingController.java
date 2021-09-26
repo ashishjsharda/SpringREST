@@ -9,5 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class GreetingController {
+    @Value("${greeting-name:Ashish}")
+    private String name;
+
+    @GetMapping
+    String getGreeting()
+    {
+        return name;
+    }
 
 }
