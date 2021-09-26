@@ -23,6 +23,10 @@ class Coffee{
     private String id;
     private String name;
 
+    public Coffee() {
+
+    }
+
     public String getId() {
         return id;
     }
