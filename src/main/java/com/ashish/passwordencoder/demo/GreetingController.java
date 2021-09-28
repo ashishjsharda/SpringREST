@@ -16,6 +16,9 @@ public class GreetingController {
     private String coffee;
 
 
+    public String getCoffee() {
+        return coffee;
+    }
     @GetMapping
     String getGreeting()
     {
