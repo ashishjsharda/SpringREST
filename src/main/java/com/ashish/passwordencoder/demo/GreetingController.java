@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/greeting")
 public class GreetingController {
     @Value("${greeting-name:Ashish}")
     private String name;
@@ -19,7 +19,7 @@ public class GreetingController {
     public String getCoffee() {
         return coffee;
     }
-    @GetMapping
+    @GetMapping("/coffee")
     String getGreeting()
     {
         return name;
