@@ -2,7 +2,9 @@ package com.ashish.passwordencoder.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +18,16 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    @Bean
+    @ConfigurationProperties(prefix = "droid")
+    Droid createDroid()
+    {
+        return new Droid();
+    }
+
 }
+
+
 
 @Entity
 class Coffee{
@@ -54,3 +65,5 @@ class Coffee{
         this.name = name;
     }
 }
+
+
